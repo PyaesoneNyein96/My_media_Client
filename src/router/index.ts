@@ -13,11 +13,10 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: (to, from, next) => {
       if (store.getters['auth/getUserToken']) {
         router.push({ name: 'home' });
-        // console.log('stay');
+        // store.dispatch('auth/setLoading', false)
       } else {
         console.log('change');
         next()
-
       }
 
     }
@@ -29,11 +28,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/', name: 'home', component: Home, alias: ['/', '/home'],
     beforeEnter: (to, from, next) => {
 
-      if (!store.getters['auth/getUserToken']) {
-        router.push({ name: 'login' })
-      } else {
+
+      if (store.getters['auth/getUserToken']) {
         next()
+        store.dispatch('auth/setLoading', false)
+      } else {
+        router.push({ name: 'login' })
       }
+      // store.dispatch('auth/setLoading', false)
     }
   },
   { path: '/post/detail/:id', name: 'detail', component: Detail }
@@ -49,10 +51,11 @@ const router = createRouter({
 })
 
 // router.beforeEach((to, from, next) => {
-//   if (store.getters['auth/getUserToken']) {
-//     next();
+//   if (!store.getters['auth/getLoader']) {
+//     console.log('loading');
+
 //   } else {
-//     router.push({ name: 'login' })
+//     next();
 //   }
 // })
 

@@ -1,9 +1,11 @@
 <template>
   <app-Header />
+  <!-- <app-Loader /> -->
 
 
-  <router-view />
-  <app-Loader />
+  <router-view v-if="!load" />
+  <app-Loader v-else />
+  <!-- <router-view /> -->
   <app-Footer />
 </template>
 
@@ -11,19 +13,35 @@
 <script>
 
 import axios from "axios";
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
-
+  data() {
+    return {
+      // loader: true
+    }
+  },
 
   computed: {
+    ...mapGetters({
+      load: 'auth/getLoader'
+    }),
+
     current() {
       return this.$route.name
-    }
+    },
+
+
+
   },
   methods: {
     re_login() {
+
+      this.$store.dispatch('auth/setLoading', true)
+      console.log('start');
       let x = localStorage.getItem('auth');
+
       if (x != 'false') {
         axios.post('http://localhost:8000/api/user/re_login', { 'email': x })
           .then(res => {
@@ -36,6 +54,8 @@ export default {
 
     }
   },
+
+
 
   beforeMount() {
     this.re_login();

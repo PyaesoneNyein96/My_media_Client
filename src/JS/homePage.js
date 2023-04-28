@@ -40,12 +40,6 @@ export default {
     methods: {
 
 
-        // authCheck() {
-        //     let authCheck = localStorage.getItem('auth');
-        //     console.log(authCheck);
-        // },
-
-
         getAllPosts() {
             axios.get('http://localhost:8000/api/posts')
                 .then(res => {
@@ -80,7 +74,6 @@ export default {
                     this.AllCategories = res.data.categories;
                     this.CategoryStatus = res.data.status;
                     this.getAllPosts();
-                    // console.log(this.AllCategories);
                 }).catch(err => console.log(err))
         },
 
@@ -128,8 +121,6 @@ export default {
     mounted() {
         this.getAllPosts();
         this.getFewCategories();
-        // this.authCheck();
-        // console.log(this.userToken);
     },
 
 
