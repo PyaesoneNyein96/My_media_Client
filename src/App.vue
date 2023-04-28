@@ -39,6 +39,7 @@ export default {
           .then(res => {
             this.$store.dispatch('auth/setUserInfo', [res.data.token, res.data])
             this.$router.push({ name: 'home' })
+            this.$store.dispatch('auth/setLoading', false)
           })
           .catch(err => console.log(err))
       }

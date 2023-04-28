@@ -13,9 +13,11 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: (to, from, next) => {
       if (store.getters['auth/getUserToken']) {
         router.push({ name: 'home' });
+        store.dispatch('auth/setLoading', false)
       } else {
         next()
       }
+      store.dispatch('auth/setLoading', false)
 
     }
   },
@@ -29,10 +31,10 @@ const routes: Array<RouteRecordRaw> = [
 
       if (store.getters['auth/getUserToken']) {
         next()
-        store.dispatch('auth/setLoading', false)
       } else {
         router.push({ name: 'login' })
       }
+
     }
   },
   { path: '/post/detail/:id', name: 'detail', component: Detail }

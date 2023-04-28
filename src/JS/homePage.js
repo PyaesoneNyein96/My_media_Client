@@ -43,6 +43,7 @@ export default {
 
         getAllPosts() {
             this.$store.dispatch('auth/setLoading', true)
+
             axios.get('http://localhost:8000/api/posts')
                 .then(res => {
 
@@ -52,6 +53,7 @@ export default {
                     this.allPosts = res.data.posts;
                 })
                 .catch(err => console.log(err))
+
             this.$store.dispatch('auth/setLoading', false)
 
         },
@@ -85,6 +87,13 @@ export default {
                 .then(res => {
                     this.AllCategories = res.data.fewCategories;
                     this.CategoryStatus = res.data.status;
+
+                    for (let i of res.data.fewPosts) {
+                        i.image = `http://localhost:8000/storage/post/` + i.image;
+                    }
+
+                    this.allPosts = res.data.fewPosts
+
                 })
                 .catch(err => console.log(err))
         },
@@ -122,8 +131,9 @@ export default {
     //Mounted
 
     mounted() {
+        // this.getFewCategories();
+        this.getAllCategories();
         this.getAllPosts();
-        this.getFewCategories();
     },
 
 

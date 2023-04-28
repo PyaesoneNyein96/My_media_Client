@@ -44,17 +44,19 @@
                         <div class="row d-flex justify-content-between">
                             <div class="col-lg-4 col-md-4">
                                 <div class="section-tittle mb-30">
-                                    <h3>Whats New</h3>
+                                    <h3 v-if="CategoryStatus == 'filter'">Trending Posts</h3>
+                                    <h3 v-else>What's New</h3>
                                 </div>
                             </div>
                             <div class="col-lg-8 col-md-8">
                                 <div class="properties__button">
                                     <!--Nav Button  -->
                                     <nav>
-                                        <div class="nav nav-tabs d-flex justify-content-start" id="nav-tab" role="tablist">
+                                        <div class="nav nav-tabs d-flex justify-content-start bg-transparent" id="nav-tab"
+                                            role="tablist">
                                             <div class="nav-cat">
                                                 <a class="nav-item nav-link active text-success fw-bold" id="nav-home-tab"
-                                                    v-if="CategoryStatus == '4'" data-toggle="tab" role="tab"
+                                                    v-if="CategoryStatus == 'filter'" data-toggle="tab" role="tab"
                                                     aria-controls="nav-home" aria-selected="true" @click="getAllCategories">
                                                     To All
                                                 </a>
