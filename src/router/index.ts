@@ -13,9 +13,7 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: (to, from, next) => {
       if (store.getters['auth/getUserToken']) {
         router.push({ name: 'home' });
-        // store.dispatch('auth/setLoading', false)
       } else {
-        console.log('change');
         next()
       }
 
@@ -35,7 +33,6 @@ const routes: Array<RouteRecordRaw> = [
       } else {
         router.push({ name: 'login' })
       }
-      // store.dispatch('auth/setLoading', false)
     }
   },
   { path: '/post/detail/:id', name: 'detail', component: Detail }
@@ -50,13 +47,6 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (!store.getters['auth/getLoader']) {
-//     console.log('loading');
 
-//   } else {
-//     next();
-//   }
-// })
 
 export default router

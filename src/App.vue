@@ -1,11 +1,9 @@
 <template>
   <app-Header />
-  <!-- <app-Loader /> -->
-
 
   <router-view v-if="!load" />
   <app-Loader v-else />
-  <!-- <router-view /> -->
+
   <app-Footer />
 </template>
 
@@ -17,11 +15,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
-  data() {
-    return {
-      // loader: true
-    }
-  },
 
   computed: {
     ...mapGetters({
@@ -39,7 +32,6 @@ export default {
     re_login() {
 
       this.$store.dispatch('auth/setLoading', true)
-      console.log('start');
       let x = localStorage.getItem('auth');
 
       if (x != 'false') {
@@ -54,8 +46,6 @@ export default {
 
     }
   },
-
-
 
   beforeMount() {
     this.re_login();

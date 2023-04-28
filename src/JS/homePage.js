@@ -28,7 +28,8 @@ export default {
     computed: {
         ...mapGetters({
             userToken: 'auth/getUserToken',
-            userData: 'auth/getUserData'
+            userData: 'auth/getUserData',
+            load: 'auth/getLoader'
         }),
     },
 
@@ -41,6 +42,7 @@ export default {
 
 
         getAllPosts() {
+            this.$store.dispatch('auth/setLoading', true)
             axios.get('http://localhost:8000/api/posts')
                 .then(res => {
 
@@ -48,9 +50,10 @@ export default {
                         i.image = `http://localhost:8000/storage/Post/` + i.image;
                     }
                     this.allPosts = res.data.posts;
-
                 })
                 .catch(err => console.log(err))
+            this.$store.dispatch('auth/setLoading', false)
+
         },
 
         selectByCategory(i) {

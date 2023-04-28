@@ -10,7 +10,6 @@
             </div>
         </div>
     </div>
-    <!-- <h1>Load</h1> -->
 </template>
 
 <script>
